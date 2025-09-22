@@ -4,12 +4,13 @@ from logging import raiseExceptions
 class Human:
     # name = None
     # surname = None
-    count = 1
+    count = 0 # class attribute
     def __init__(self, name, surname, age, mark):
-        self.name = name
+        self.name = name    # object attribute
         self.surname = surname
         self.__age = age if age > 0  else 0     # __private
         self._mark = mark    # _protected
+        Human.count += 1
 
     def show_info(self):
         print(f"{self.name} {self.surname} {self.__age} {self._mark}")
@@ -58,8 +59,20 @@ human = Human("Nadir", "Xamanov", 44, 8.6)
 # human.set_age(89)
 # print(human.get_age())
 
-human.age = -5
-print(human.age)
+# human.age = -5
+# print(human.age)
 
+
+# print(dir(human))
+# print(Human.__dict__)
+# print(dir(Human))
+
+# print(Human.count)
+# Human.count = 25
+print(human.__dict__)
+human.count = 25
+print(human.__dict__)
+# print(Human.count)
+# print(human.count)
 
 # magic methods, Inheritance, "утиная типизация"   
