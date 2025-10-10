@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = 'todo'
@@ -6,5 +6,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<int:task_id>/', views.detail, name='detail'),
     path('<int:task_id>/done/', views.toggle_done, name='toggle_done'),
+# base/urls.py
+path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+
 ]
 

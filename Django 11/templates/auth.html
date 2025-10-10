@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'todo/css/auth.css' %}">
+  <title>Auth</title>
+</head>
+<body>
+<div class="wrapper">
+  <div class="title-text">
+    <div class="title login">Login Form</div>
+    <div class="title signup">Signup Form</div>
+  </div>
+
+<div class="form-container" style="position:relative;overflow:hidden;">
+  <div class="slide-controls">
+    <!-- порядок ВАЖЕН: сначала radio, потом label, потом slider-tab -->
+    <input type="radio" name="slide" id="login" checked>
+    <input type="radio" name="slide" id="signup">
+    <label for="login" class="slide login">Login</label>
+    <label for="signup" class="slide signup">Signup</label>
+    <div class="slider-tab"></div>
+  </div>
+
+    <div class="form-inner">
+      <!-- LOGIN -->
+      <form method="post" action="" class="login">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="field">{{ login_form.username }}</div>
+        <div class="field">{{ login_form.password }}</div>
+
+        {% if login_form.non_field_errors %}
+          <div class="error">{{ login_form.non_field_errors|join:", " }}</div>
+        {% endif %}
+
+        <div class="pass-link"><a href="#">Forgot password?</a></div>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <button type="submit" name="login_submit" class="btn">Login</button>
+        </div>
+        <div class="signup-link">Not a member?
+          <a href="#" onclick="document.getElementById('signup').checked=true;return false;">Signup now</a>
+        </div>
+      </form>
+
+      <!-- SIGNUP -->
+      <form method="post" action="" class="signup">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="field">{{ register_form.username }}</div>
+        <div class="field">{{ register_form.password1 }}</div>
+        <div class="field">{{ register_form.password2 }}</div>
+
+        {% if register_form.non_field_errors %}
+          <div class="error">{{ register_form.non_field_errors|join:", " }}</div>
+        {% endif %}
+
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <button type="submit" name="register_submit" class="btn">Signup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'todo/js/auth.js' %}"></script>
+</body>
+</html>
