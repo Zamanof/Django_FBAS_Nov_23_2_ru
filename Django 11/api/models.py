@@ -1,7 +1,7 @@
 from tastypie.resources import ModelResource
 from todo.models import Category, Task
 from tastypie.authorization import Authorization
-from .authentication import CustomAuthentication
+
 
 
 class CategoryResource(ModelResource):
@@ -17,7 +17,6 @@ class TaskResource(ModelResource):
         resource_name = 'tasks'
         allowed_methods = ['get', 'post', 'put', 'delete']
         excludes = ['created', 'updated']
-        authentication = CustomAuthentication()
         authorization = Authorization()
 
     def hydrate(self, bundle):

@@ -6,6 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<int:task_id>/', views.detail, name='detail'),
     path('<int:task_id>/done/', views.toggle_done, name='toggle_done'),
-
 ]
 

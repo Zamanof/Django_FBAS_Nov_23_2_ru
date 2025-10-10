@@ -15,7 +15,7 @@ api.register(task_resource)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('todo/', include('todo.urls')),  
-    path('', include('todo.urls')),  
+    # path('', RedirectView.as_view(url="/todo/", permanent=False)),
 
 
     # path('api/', include(category_resource.urls)),
