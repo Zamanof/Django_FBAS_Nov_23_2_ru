@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'todo.apps.TodoConfig',
     'api.apps.ApiConfig',
+    "django.contrib.staticfiles",
     'tastypie',
+    'accounts'
     ]
 
 MIDDLEWARE = [
@@ -124,7 +126,10 @@ USE_I18N = True
 USE_TZ = True
 
 
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

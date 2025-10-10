@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'todo/css/auth.css' %}">
+</head>
+<body>
+
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form method="get" action="{% url 'accounts:index'  %}">
+			<h1>Create Account</h1>
+			{% csrf_token %}
+            {{ register_form.username }}
+            {{ register_form.password }}
+			<button type="submit" name="register_submit">Sign Up</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form method="get" action="{% url 'accounts:index' %}">
+			<h1>Sign in</h1>
+			{% csrf_token %}
+            {{ login_form.username }}
+            {{ login_form.password }}
+			<button type="submit" name="login_submit">Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{% static 'todo/js/auth.js' %}"></script>
+</body>
+</html>

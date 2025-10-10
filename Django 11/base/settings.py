@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'todo.apps.TodoConfig',
     'api.apps.ApiConfig',
+    "django.contrib.staticfiles",
     'tastypie',
     ]
 
@@ -124,7 +125,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-
+STATIC_URL = 'static/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
