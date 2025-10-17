@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from typing import List, Optional
-from models import CarRead, CarCreate
+from models import CarRead, CarCreate, CarUpdate
 from In_memory_data import _store
-from  car_repository_service import _create_car
+from  car_repository_service import _create_car, _replace_car, _delete_car, _patch_car, _get_car_by_id
 
 app = FastAPI()
 
@@ -29,5 +29,20 @@ def get_all_cars(model: Optional[str] = None,
         items = [c for c in items if manufacturer.lower() in c.manufacturer.lower()]
     offset = offset * limit
     return items[offset : offset + limit]
+
+
+
+@app.get('/cars/{cid}', response_model=CarRead)
+def get_car(cid: int):
+    return _get_car_by_id(cid)
+
+@app.patch('/cars/{cid}', response_model=CarRead)
+def patch_car(cid: int, payload: CarUpdate):
+    return _patch_car(cid, payload)
+
+@app.delete('/cars/{cid}', response_model=CarRead)
+def delete_car(cid: int):
+    _delete_car(cid)
+    return None
 
 

@@ -1,4 +1,6 @@
-from models import CarCreate, CarRead
+from http.client import HTTPException
+
+from models import CarCreate, CarRead, CarUpdate
 from In_memory_data import _next_id, _lock, _store
 
 
@@ -12,8 +14,28 @@ def _create_car(payload: CarCreate)->CarRead:
         return car
 
 def _get_car_by_id(cid: int)->CarRead:
-    pass
+    car = _store.get(cid)
+    if not car:
+        raise HTTPException(404, 'Car not found')
+    return car
 
 def _delete_car(cid: int):
-    pass
+    _ = _get_car_by_id(cid)
+    del _store[cid]
+
+def _patch_car(cid: int, payload: CarUpdate)->CarRead:
+    current = _get_car_by_id(cid)
+    data = current.model_dump()
+    updates = payload.model_dump(exclude_unset=True)
+    data.update(updates)
+    updated = CarRead(**data)
+    _store[cid] = updated
+    return updated
+
+
+def _replace_car(cid: int, payload: CarCreate)->CarRead:
+    current = _get_car_by_id(cid)
+    car = CarRead(id=cid, **payload.model_dump())
+    _store[cid] = car
+    return car
 
